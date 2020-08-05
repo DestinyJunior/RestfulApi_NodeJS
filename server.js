@@ -2,7 +2,9 @@ const express = require('express');
 const env = require('dotenv');
 // const logger = require('./middleware/logger'); // custom logger
 const morgan = require('morgan');
+// eslint-disable-next-line no-unused-vars
 const colors = require('colors');
+const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 
 
@@ -30,6 +32,10 @@ if (process.env.NODE_ENV === 'development') {
 
 // mount routers
 app.use('/api/v1/bootcamps', bootcamps);
+
+// middle ware error handler
+app.use(errorHandler);
+
 
 const PORT = process.env.PORT || 5000;
 
